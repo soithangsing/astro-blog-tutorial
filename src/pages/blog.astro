@@ -1,6 +1,10 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 
+const allPosts = Object.values(
+  import.meta.glob("./posts/*.md", { eager: true })
+);
+
 const pageName = "Blog";
 const pageSubtitle = "Welcome to my bloggity blog";
 ---
@@ -8,8 +12,12 @@ const pageSubtitle = "Welcome to my bloggity blog";
 <BaseLayout pageName={pageName} pageSubtitle={pageSubtitle}>
   <p>This is where I will write my blog posts.</p>
   <ul>
-    <li><a href="/posts/hello-world/">Post 1</a></li>
-    <li><a href="/posts/post-2/">Post 2</a></li>
-    <li><a href="/posts/post-3/">Post 3</a></li>
+    {
+      allPosts.map((post: any) => (
+        <li>
+          <a href={post.url}>{post.frontmatter.title}</a>
+        </li>
+      ))
+    }
   </ul>
 </BaseLayout>

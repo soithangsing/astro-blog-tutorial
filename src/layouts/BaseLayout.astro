@@ -4,7 +4,7 @@ import Header from "../components/Header.astro";
 import "../styles/globals.css";
 
 const { pageName } = Astro.props;
-const { pageSubtitle } = Astro.props;
+const { pageSubtitle = "" } = Astro.props;
 ---
 
 <html lang="en">
